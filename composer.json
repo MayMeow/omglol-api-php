@@ -1,0 +1,17 @@
+{
+    "name": "maymeow/omglol",
+    "autoload": {
+        "psr-4": {
+            "MayMeow\\Omglol\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "May",
+            "email": "may@maymeow.com"
+        }
+    ],
+    "require": {
+        "meow/hydrator": "dev-main"
+    }
+}
