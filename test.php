@@ -1,6 +1,7 @@
 <?php
 
 use MayMeow\Omglol\Model\Purl\PurlData;
+use MayMeow\Omglol\Services\StatusLogService;
 use Meow\Hydrator\Hydrator;
 
 require_once "vendor/autoload.php";
@@ -30,4 +31,9 @@ $testString = '{
 $hydrator = new Hydrator();
 $model = $hydrator->hydrate(PurlData::class, json_decode($testString, true));
 
-var_dump($model);
+//var_dump($model);
+
+//$message = new StatusMessage('Ahoj svet', '👩');
+
+//var_dump($message->getMessageData(isJsonEncoded: false));
+

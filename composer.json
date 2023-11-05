@@ -2,7 +2,8 @@
     "name": "maymeow/omglol",
     "autoload": {
         "psr-4": {
-            "MayMeow\\Omglol\\": "src/"
+            "MayMeow\\Omglol\\": "src/",
+            "MayMeow\\Omglol\\Tests\\": "tests/"
         }
     },
     "authors": [
@@ -12,6 +13,13 @@
         }
     ],
     "require": {
-        "meow/hydrator": "dev-main"
+        "meow/hydrator": "dev-main",
+        "symfony/http-client": "^6.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.4"
+    },
+    "scripts": {
+        "test": "phpunit tests"
     }
 }
