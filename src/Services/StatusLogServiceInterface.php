@@ -11,7 +11,7 @@ interface StatusLogServiceInterface
      * Fetch a single Statuslog entry
      * address and staus id is required
      */
-    //public function getSIngleStatus(): Status;
+    public function getSIngleStatus(string $address, string $statusID): Status;
 
     /**
      * Undocumented function
@@ -25,10 +25,10 @@ interface StatusLogServiceInterface
 
     //public function updateStatus(): StatusResponse;
 
-    //public function getBio(): StatusResponse;
+    public function getBio(string $address): StatusResponse;
 
     /**
      * retrieve everyones latest statuses
      */
-    //public function getLatest(): array;
+    public function getLatest(): array;
 }

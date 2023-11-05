@@ -2,7 +2,9 @@
 
 namespace MayMeow\Omglol\Services;
 
+use MayMeow\Omglol\Model\StatusLog\Status;
 use MayMeow\Omglol\Model\StatusLog\StatusLog;
+use MayMeow\Omglol\Model\StatusLog\StatusResponse;
 use MayMeow\Omglol\Services\Http\OmgLolClient;
 use MayMeow\Omglol\Services\Http\OmgLolClientInterface;
 use Meow\Hydrator\Hydrator;
@@ -20,6 +22,16 @@ class StatusLogService implements StatusLogServiceInterface
             $this->client = new OmgLolClient($token);
         }
         $this->hydrator = new Hydrator();
+    }
+
+    public function getSIngleStatus(string $address, string $statusID): Status
+    {
+        $response = $this->client->get(sprintf('/address/%s/statuses/%s', $address, $statusID));
+
+        /** @var StatusLog $status */
+        $status = $this->hydrator->hydrate(StatusLog::class, json_decode($response->getContent(), true));
+
+        return $status->response->status;
     }
 
     /**
@@ -40,5 +52,25 @@ class StatusLogService implements StatusLogServiceInterface
         $statuses = $this->hydrator->hydrate(StatusLog::class, json_decode($response->getContent(), true));
 
         return $statuses->response->statuses;
+    }
+
+    public function getBio(string $address): StatusResponse
+    {
+        $response = $this->client->get(sprintf('/address/%s/statuses/bio', $address));
+
+        /** @var StatusLog $status */
+        $status = $this->hydrator->hydrate(StatusLog::class, json_decode($response->getContent(), true));
+
+        return $status->response;
+    }
+
+    public function getLatest(): array
+    {
+        $response = $this->client->get('/statuslog/latest');
+
+        /** @var StatusLog $status */
+        $status = $this->hydrator->hydrate(StatusLog::class, json_decode($response->getContent(), true));
+
+        return $status->response->statuses;
     }
 }

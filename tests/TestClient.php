@@ -15,6 +15,18 @@ class TestClient implements OmgLolClientInterface
         if ($url === '/statuslog') {
             return new TestResponse($this->getStatusLog());
         }
+
+        if ($url === '/address/foo/statuses/6336318079242') {
+            return new TestResponse($this->getSingleStatus());
+        }
+
+        if ($url === '/address/adam/statuses/bio') {
+            return new TestResponse($this->getStatusLogBio());
+        }
+
+        if ($url === '/statuslog/latest') {
+            return new TestResponse($this->getLatest());
+        }
     }
 
     public static function getTestDataFor(string $url): array
@@ -84,6 +96,72 @@ class TestClient implements OmgLolClientInterface
                         "relative_time": "45 minutes ago",
                         "emoji": "📺",
                         "content": "Watching Ink Master"
+                    }
+                ]
+            }
+        }';
+    }
+
+    public function getSingleStatus(): string
+    {
+        return '{
+            "request": {
+                "status_code": 200,
+                "success": true
+            },
+            "response": {
+                "message": "Here’s the status at foo.status.lol/6336318079242.",
+                "status": {
+                    "id": "6336318079242",
+                    "address": "foo",
+                    "created": "1664496000",
+                    "emoji": "☕️",
+                    "content": "Enjoying my coffee!"
+                }
+            }
+        }';
+    }
+
+    public function getStatusLogBio(): string
+    {
+        return '{
+            "request": {
+                "status_code": 200,
+                "success": true
+            },
+            "response": {
+                "message": "Here’s the bio for foo’s Statuslog page.",
+                "bio": "# Foo\nThis is my bio!",
+                "css": ""
+            }
+        }';
+    }
+
+    public function getLatest()
+    {
+        return '{
+            "request": {
+                "status_code": 200,
+                "success": true
+            },
+            "response": {
+                "message": "Here are everyone’s latest statuses.",
+                "statuses": [
+                    {
+                        "id": "638ff5cfaa031",
+                        "address": "cm",
+                        "created": "1670378959",
+                        "relative_time": "1 day ago",
+                        "emoji": "🤔",
+                        "content": "Excited about omg.lol!"
+                    },
+                    {
+                        "id": "638ff59bd1be8",
+                        "address": "moe",
+                        "created": "1670378907",
+                        "relative_time": "1 day ago",
+                        "emoji": "👀",
+                        "content": "Browsing [omg.lol - Statuslog](https://home.omg.lol/address/moe/statuslog)."
                     }
                 ]
             }
