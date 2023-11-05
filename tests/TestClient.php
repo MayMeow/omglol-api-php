@@ -15,6 +15,10 @@ class TestClient implements OmgLolClientInterface
         if ($url === '/statuslog') {
             return new TestResponse($this->getStatusLog());
         }
+
+        if ($url === '/address/foo/statuses/6336318079242') {
+            return new TestResponse($this->getSingleStatus());
+        }
     }
 
     public static function getTestDataFor(string $url): array
@@ -86,6 +90,26 @@ class TestClient implements OmgLolClientInterface
                         "content": "Watching Ink Master"
                     }
                 ]
+            }
+        }';
+    }
+
+    public function getSingleStatus()
+    {
+        return '{
+            "request": {
+                "status_code": 200,
+                "success": true
+            },
+            "response": {
+                "message": "Here’s the status at foo.status.lol/6336318079242.",
+                "status": {
+                    "id": "6336318079242",
+                    "address": "foo",
+                    "created": "1664496000",
+                    "emoji": "☕️",
+                    "content": "Enjoying my coffee!"
+                }
             }
         }';
     }

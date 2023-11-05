@@ -11,7 +11,7 @@ interface StatusLogServiceInterface
      * Fetch a single Statuslog entry
      * address and staus id is required
      */
-    //public function getSIngleStatus(): Status;
+    public function getSIngleStatus(string $address, string $statusID): Status;
 
     /**
      * Undocumented function

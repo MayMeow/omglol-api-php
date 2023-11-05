@@ -46,4 +46,13 @@ class StatusLogServiceTest extends TestCase
 
         $this->assertCount(count($testData['response']['statuses']), $statuses);
     }
+
+    public function testGetSingleStatus()
+    {
+        $status = $this->statusLogService->getSIngleStatus('foo', '6336318079242');
+        $testData = TestClient::getTestDataFor('/address/foo/statuses/6336318079242');
+
+        $this->assertInstanceOf(Status::class, $status);
+        $this->assertEquals($testData['response']['status']['id'], $status->id);
+    }
 }
