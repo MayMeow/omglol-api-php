@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Composer run action PHPStan
+      - name: Composer run action test
         uses: MayMeowHQ/composer-run-action@v7
         with:
           composer_script: 'test'
