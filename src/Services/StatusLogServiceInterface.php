@@ -25,7 +25,7 @@ interface StatusLogServiceInterface
 
     //public function updateStatus(): StatusResponse;
 
-    //public function getBio(): StatusResponse;
+    public function getBio(string $address): StatusResponse;
 
     /**
      * retrieve everyones latest statuses

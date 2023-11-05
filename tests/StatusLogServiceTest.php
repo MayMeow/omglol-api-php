@@ -3,6 +3,7 @@
 namespace MayMeow\Omglol\Tests;
 
 use MayMeow\Omglol\Model\StatusLog\Status;
+use MayMeow\Omglol\Model\StatusLog\StatusResponse;
 use MayMeow\Omglol\Services\Http\OmgLolClientInterface;
 use MayMeow\Omglol\Services\StatusLogService;
 use MayMeow\Omglol\Services\StatusLogServiceInterface;
@@ -54,5 +55,14 @@ class StatusLogServiceTest extends TestCase
 
         $this->assertInstanceOf(Status::class, $status);
         $this->assertEquals($testData['response']['status']['id'], $status->id);
+    }
+
+    public function testGetStatuslogBio()
+    {
+        $status = $this->statusLogService->getBio('adam');
+        $testData = TestClient::getTestDataFor('/address/adam/statuses/bio');
+
+        $this->assertInstanceOf(StatusResponse::class, $status);
+        $this->assertEquals($testData['response']['bio'], $status->bio);
     }
 }

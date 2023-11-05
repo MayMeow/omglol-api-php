@@ -19,6 +19,10 @@ class TestClient implements OmgLolClientInterface
         if ($url === '/address/foo/statuses/6336318079242') {
             return new TestResponse($this->getSingleStatus());
         }
+
+        if ($url === '/address/adam/statuses/bio') {
+            return new TestResponse($this->getStatusLogBio());
+        }
     }
 
     public static function getTestDataFor(string $url): array
@@ -110,6 +114,21 @@ class TestClient implements OmgLolClientInterface
                     "emoji": "☕️",
                     "content": "Enjoying my coffee!"
                 }
+            }
+        }';
+    }
+
+    public function getStatusLogBio()
+    {
+        return '{
+            "request": {
+                "status_code": 200,
+                "success": true
+            },
+            "response": {
+                "message": "Here’s the bio for foo’s Statuslog page.",
+                "bio": "# Foo\nThis is my bio!",
+                "css": ""
             }
         }';
     }
