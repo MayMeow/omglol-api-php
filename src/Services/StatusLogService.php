@@ -64,5 +64,13 @@ class StatusLogService implements StatusLogServiceInterface
         return $status->response;
     }
 
+    public function getLatest(): array
+    {
+        $response = $this->client->get('/statuslog/latest');
 
+        /** @var StatusLog $status */
+        $status = $this->hydrator->hydrate(StatusLog::class, json_decode($response->getContent(), true));
+
+        return $status->response->statuses;
+    }
 }

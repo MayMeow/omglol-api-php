@@ -23,6 +23,10 @@ class TestClient implements OmgLolClientInterface
         if ($url === '/address/adam/statuses/bio') {
             return new TestResponse($this->getStatusLogBio());
         }
+
+        if ($url === '/statuslog/latest') {
+            return new TestResponse($this->getLatest());
+        }
     }
 
     public static function getTestDataFor(string $url): array
@@ -98,7 +102,7 @@ class TestClient implements OmgLolClientInterface
         }';
     }
 
-    public function getSingleStatus()
+    public function getSingleStatus(): string
     {
         return '{
             "request": {
@@ -118,7 +122,7 @@ class TestClient implements OmgLolClientInterface
         }';
     }
 
-    public function getStatusLogBio()
+    public function getStatusLogBio(): string
     {
         return '{
             "request": {
@@ -129,6 +133,37 @@ class TestClient implements OmgLolClientInterface
                 "message": "Here’s the bio for foo’s Statuslog page.",
                 "bio": "# Foo\nThis is my bio!",
                 "css": ""
+            }
+        }';
+    }
+
+    public function getLatest()
+    {
+        return '{
+            "request": {
+                "status_code": 200,
+                "success": true
+            },
+            "response": {
+                "message": "Here are everyone’s latest statuses.",
+                "statuses": [
+                    {
+                        "id": "638ff5cfaa031",
+                        "address": "cm",
+                        "created": "1670378959",
+                        "relative_time": "1 day ago",
+                        "emoji": "🤔",
+                        "content": "Excited about omg.lol!"
+                    },
+                    {
+                        "id": "638ff59bd1be8",
+                        "address": "moe",
+                        "created": "1670378907",
+                        "relative_time": "1 day ago",
+                        "emoji": "👀",
+                        "content": "Browsing [omg.lol - Statuslog](https://home.omg.lol/address/moe/statuslog)."
+                    }
+                ]
             }
         }';
     }

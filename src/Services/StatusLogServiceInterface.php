@@ -30,5 +30,5 @@ interface StatusLogServiceInterface
     /**
      * retrieve everyones latest statuses
      */
-    //public function getLatest(): array;
+    public function getLatest(): array;
 }

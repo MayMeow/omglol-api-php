@@ -65,4 +65,19 @@ class StatusLogServiceTest extends TestCase
         $this->assertInstanceOf(StatusResponse::class, $status);
         $this->assertEquals($testData['response']['bio'], $status->bio);
     }
+
+    public function testGetLatest()
+    {
+        $statuses = $this->statusLogService->getLatest();
+        $testData = TestClient::getTestDataFor('/statuslog/latest');
+
+        $i = 0;
+        foreach ($statuses as $status) {
+            $this->assertInstanceOf(Status::class, $status);
+            $this->assertEquals($testData['response']['statuses'][$i]['id'], $status->id);
+            $i++;
+        }
+
+        $this->assertCount(count($testData['response']['statuses']), $statuses);
+    }
 }
