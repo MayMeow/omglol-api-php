@@ -31,6 +31,12 @@ class OmgLolClient implements OmgLolClientInterface
         return $this->client->request('GET', $url, $this->_updateHeaders());
     }
 
+    public function post(string $url, array $data)
+    {
+        $url = $this->baseUrl . $url;
+        return $this->client->request('POST', $url, $this->_updateHeaders() + ['body' => json_encode($data)]);
+    }
+
     protected function _updateHeaders(): array
     {
         $this->defaultHeaders['Authorization'] = 'Bearer ' . $this->token;

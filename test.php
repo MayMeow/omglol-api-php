@@ -37,3 +37,10 @@ $model = $hydrator->hydrate(PurlData::class, json_decode($testString, true));
 
 //var_dump($message->getMessageData(isJsonEncoded: false));
 
+$statusLog = new StatusLogService('d63443e94579d2690b28496193e17dc7');
+
+//var_dump($statusLog->getAllStatuses('may'));
+
+$response = $statusLog->createStatus('may', '🎉 test (single line posting) 2');
+
+var_dump($response);

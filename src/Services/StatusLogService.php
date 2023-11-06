@@ -4,6 +4,7 @@ namespace MayMeow\Omglol\Services;
 
 use MayMeow\Omglol\Model\StatusLog\Status;
 use MayMeow\Omglol\Model\StatusLog\StatusLog;
+use MayMeow\Omglol\Model\StatusLog\StatusMessage;
 use MayMeow\Omglol\Model\StatusLog\StatusResponse;
 use MayMeow\Omglol\Services\Http\OmgLolClient;
 use MayMeow\Omglol\Services\Http\OmgLolClientInterface;
@@ -72,5 +73,24 @@ class StatusLogService implements StatusLogServiceInterface
         $status = $this->hydrator->hydrate(StatusLog::class, json_decode($response->getContent(), true));
 
         return $status->response->statuses;
+    }
+
+    public function createStatus(string $address, StatusMessage|string $message): StatusResponse
+    {
+        if ($message instanceof StatusMessage) {
+            $data = $message->getMessageData();
+        } else {
+            $data = [
+                'status' => $message
+            ];}
+
+        $response = $this->client->post(sprintf('/address/%s/statuses/', $address), $data);
+
+        var_dump($response->getContent());
+
+        /** @var StatusLog $status */
+        $status = $this->hydrator->hydrate(StatusLog::class, json_decode($response->getContent(), true));
+
+        return $status->response;
     }
 }

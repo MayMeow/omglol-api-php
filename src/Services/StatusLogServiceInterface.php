@@ -3,6 +3,7 @@
 namespace MayMeow\Omglol\Services;
 
 use MayMeow\Omglol\Model\StatusLog\Status;
+use MayMeow\Omglol\Model\StatusLog\StatusMessage;
 use MayMeow\Omglol\Model\StatusLog\StatusResponse;
 
 interface StatusLogServiceInterface
@@ -21,7 +22,7 @@ interface StatusLogServiceInterface
      */
     public function getAllStatuses(?string $address = null): array;
 
-    //public function createStatus(): StatusResponse;
+    public function createStatus(string $address, StatusMessage|string $message): StatusResponse;
 
     //public function updateStatus(): StatusResponse;
 
